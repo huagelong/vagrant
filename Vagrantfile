@@ -12,8 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  #config.vm.box = "scalefactory/centos6"
-  onfig.vm.box = "centos/7"
+  config.vm.box = "scalefactory/centos6"
   config.vm.network "public_network"
   #config.vm.network "forwarded_port", guest: 80, host: 8888, host_ip: "0.0.0.0"
   #config.vm.synced_folder "/vagrant/nginx_conf_tengine", "/server/software/nginx/conf",owner:"root",group:"root", :mount_options => ["dmode=755","fmode=644"]
@@ -84,19 +83,19 @@ Vagrant.configure("2") do |config|
     chmod a+x /etc/init.d/php-fpm
  
 
-    #tar xf /vagrant/opt/autoconf-2.69.tar.gz -C /usr/src/ && cd /usr/src/autoconf-2.69/
-    #./configure
-    #make -j4 && make install
+    tar xf /vagrant/opt/autoconf-2.69.tar.gz -C /usr/src/ && cd /usr/src/autoconf-2.69/
+    ./configure
+    make -j4 && make install
 
-    #tar xf /vagrant/opt/gcc-4.9.4.tar.gz -C /usr/src/ && cd /usr/src/gcc-4.9.4/
-    #./contrib/download_prerequisites
-    #./configure --prefix=/usr/local/gcc  --enable-bootstrap  --enable-checking=release --enable-languages=c,c++ --disable-multilib
-    #make -j4 && make install
+    tar xf /vagrant/opt/gcc-4.9.4.tar.gz -C /usr/src/ && cd /usr/src/gcc-4.9.4/
+    ./contrib/download_prerequisites
+    ./configure --prefix=/usr/local/gcc  --enable-bootstrap  --enable-checking=release --enable-languages=c,c++ --disable-multilib
+    make -j4 && make install
 
-    #mv /usr/bin/gcc /usr/bin/gcc_old
-    #mv /usr/bin/g++ /usr/bin/g++_old
-    #ln -svf /usr/local/gcc/bin/gcc /usr/bin/gcc
-    #ln -svf /usr/local/gcc/bin/g++ /usr/bin/g++
+    mv /usr/bin/gcc /usr/bin/gcc_old
+    mv /usr/bin/g++ /usr/bin/g++_old
+    ln -svf /usr/local/gcc/bin/gcc /usr/bin/gcc
+    ln -svf /usr/local/gcc/bin/g++ /usr/bin/g++
 
     tar xf /vagrant/opt/swoole-src-4.2.1.tar.gz -C /usr/src/ && cd /usr/src/swoole-src-4.2.1/
     /srv/php/bin/phpize
