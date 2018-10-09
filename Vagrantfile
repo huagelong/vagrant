@@ -20,8 +20,8 @@ Vagrant.configure("2") do |config|
   #config.vm.network :public_network, auto_config: true, ip: "192.168.5.2", bridge:"ens1f0", bootproto: "static", gateway: "192.168.5.1"
   
   config.vm.provider "virtualbox" do |vb|
-      config.ssh.username = "vagrant"
-      config.ssh.password = "vagrant"
+#      config.ssh.username = "vagrant"
+#      config.ssh.password = "vagrant"
       vb.memory = "1024"
       vb.cpus = 4
       vb.name = "trensy_vagrant"
