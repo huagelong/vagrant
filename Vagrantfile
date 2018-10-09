@@ -12,7 +12,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "scalefactory/centos6"
+  #config.vm.box = "scalefactory/centos6"
+  config.vm.box = "centos/7"
   config.vm.network "public_network"
   #config.vm.network "forwarded_port", guest: 80, host: 8888, host_ip: "0.0.0.0"
   #config.vm.synced_folder "/vagrant/nginx_conf_tengine", "/server/software/nginx/conf",owner:"root",group:"root", :mount_options => ["dmode=755","fmode=644"]
