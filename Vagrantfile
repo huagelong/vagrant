@@ -14,6 +14,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   #config.vm.box = "scalefactory/centos6"
   #config.vm.network "private_network", ip: "192.168.1.2"
+  #config.vm.network "public_network", ip: "192.168.0.5"
+
   config.vm.box = "centos/7"
   config.vm.network "public_network"
   #config.vm.network "forwarded_port", guest: 80, host: 8888, host_ip: "0.0.0.0"
@@ -21,18 +23,16 @@ Vagrant.configure("2") do |config|
   #config.vm.network :public_network, auto_config: true, ip: "192.168.5.2", bridge:"ens1f0", bootproto: "static", gateway: "192.168.5.1"
   
   config.vm.provider "virtualbox" do |vb|
-#      config.ssh.username = "vagrant"
-#      config.ssh.password = "vagrant"
       vb.memory = "1024"
-      vb.cpus = 4
+      vb.cpus = 2
       vb.name = "trensy"
   end
-
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo su -
     yum -y update
     yum -y install gcc-c++
+    yum -y install autoconf
     yum -y install lrzsz
     yum -y install pcre pcre-devel
     yum -y install openssl
@@ -83,21 +83,6 @@ Vagrant.configure("2") do |config|
 
     \cp -rf /usr/src/php-7.1.0/sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
     chmod a+x /etc/init.d/php-fpm
- 
-
-    tar xf /vagrant/opt/autoconf-2.69.tar.gz -C /usr/src/ && cd /usr/src/autoconf-2.69/
-    ./configure
-    make -j4 && make install
-
-    tar xf /vagrant/opt/gcc-4.9.4.tar.gz -C /usr/src/ && cd /usr/src/gcc-4.9.4/
-    ./contrib/download_prerequisites
-    ./configure --prefix=/usr/local/gcc  --enable-bootstrap  --enable-checking=release --enable-languages=c,c++ --disable-multilib
-    make -j4 && make install
-
-    mv /usr/bin/gcc /usr/bin/gcc_old
-    mv /usr/bin/g++ /usr/bin/g++_old
-    ln -svf /usr/local/gcc/bin/gcc /usr/bin/gcc
-    ln -svf /usr/local/gcc/bin/g++ /usr/bin/g++
 
     tar xf /vagrant/opt/swoole-src-4.2.1.tar.gz -C /usr/src/ && cd /usr/src/swoole-src-4.2.1/
     /srv/php/bin/phpize
@@ -105,11 +90,12 @@ Vagrant.configure("2") do |config|
     make -j4 && make install
     echo 'extension="swoole.so"' >>/srv/php/lib/php.ini
 
-    yum -y install redis-server
+    yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+    yum --enablerepo=remi -y install redis
 
-    service redis start
-    service php-fpm start
-    service nginx start
+    systemctl start redis
+    systemctl start php-fpm 
+    systemctl start nginx
 
   SHELL
 
