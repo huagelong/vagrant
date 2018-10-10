@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   #config.vm.box = "scalefactory/centos6"
+  #config.vm.network "private_network", ip: "192.168.1.2"
   config.vm.box = "centos/7"
   config.vm.network "public_network"
   #config.vm.network "forwarded_port", guest: 80, host: 8888, host_ip: "0.0.0.0"
@@ -24,7 +25,7 @@ Vagrant.configure("2") do |config|
 #      config.ssh.password = "vagrant"
       vb.memory = "1024"
       vb.cpus = 4
-      vb.name = "trensy_vagrant"
+      vb.name = "trensy"
   end
 
 
