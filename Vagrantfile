@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.network "public_network"
   #config.vm.network "forwarded_port", guest: 80, host: 8888, host_ip: "0.0.0.0"
-  #config.vm.synced_folder "/vagrant/www", "www",owner:"root",group:"root", :mount_options => ["dmode=755","fmode=644"]
+  config.vm.synced_folder ".", "/vagrant",owner:"root",group:"root", :mount_options => ["dmode=755","fmode=644"]
   
   config.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -33,5 +33,12 @@ Vagrant.configure("2") do |config|
     chmod 0777 /vagrant/opt/install.sh
     /vagrant/opt/install.sh
   SHELL
+
+  config.vm.provision "shell",run:"always",inline: <<-SHELL_RUN
+    sudo su -
+    service redis start
+    service php-fpm start
+    service nginx start
+  SHELL_RUN
 
 end
