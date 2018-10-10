@@ -41,8 +41,9 @@ mkdir -p /srv/php/var/session
 mkdir -p /srv/php/log/
 echo 'export PATH="/srv/php/bin:$PATH"'>>/etc/profile
 source /etc/profile
+cd /tmp
 curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
+mv /tmp/composer.phar /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer
 \cp -rf /usr/src/php-7.1.0/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod a+x /etc/init.d/php-fpm
