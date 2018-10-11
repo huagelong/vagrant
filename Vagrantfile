@@ -16,12 +16,16 @@ Vagrant.configure("2") do |config|
   #config.vm.network "private_network", ip: "192.168.1.2"
   #config.vm.network "public_network", ip: "192.168.0.5"
 
-  config.vm.box = "centos/7"
+  #config.vm.box = "centos/7"
+  config.vm.box = "geerlingguy/centos7"
   config.vm.network "public_network"
   #config.vm.network "forwarded_port", guest: 80, host: 8888, host_ip: "0.0.0.0"
-  config.vm.synced_folder ".", "/vagrant",owner:"root",group:"root", :mount_options => ["dmode=755","fmode=644"]
-  
+  config.vm.synced_folder ".","/vagrant",owner:"root",group:"root"
+  config.vm.synced_folder "F:/code/php","/code",owner:"root",group:"root"
+
   config.vm.provider "virtualbox" do |vb|
+      config.ssh.username = "vagrant"
+      config.ssh.password = "vagrant"
       vb.memory = "1024"
       vb.cpus = 2
       vb.name = "trensy"
