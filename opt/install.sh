@@ -7,6 +7,7 @@ yum -y install pcre pcre-devel
 yum -y install openssl
 yum -y install openssl-devel
 yum -y install vim
+yum -y install kernel-devel-3.10.0-862.14.4.el7.x86_64
 tar xf /vagrant/opt/nginx-1.10.2.tar.gz -C /usr/src/ && cd /usr/src/nginx-1.10.2/
 ./configure --prefix=/srv/nginx --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module --with-pcre
 make -j4 && make install
@@ -41,7 +42,7 @@ mkdir -p /srv/php/var/session
 mkdir -p /srv/php/log/
 echo 'export PATH="/srv/php/bin:$PATH"'>>/etc/profile
 source /etc/profile
-mv /vagrant/opt/composer /usr/local/bin/composer
+\cp -rf /vagrant/opt/composer /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer
 \cp -rf /usr/src/php-7.1.0/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod a+x /etc/init.d/php-fpm
@@ -51,14 +52,15 @@ tar xf /vagrant/opt/swoole-src-4.2.1.tar.gz -C /usr/src/ && cd /usr/src/swoole-s
 make -j4 && make install
 echo 'extension="swoole.so"' >>/srv/php/lib/php.ini
 cd /vagrant/opt
-curl -o mysql.tar.gz  http://git.php.net/?p=pecl/database/mysql.git;a=snapshot;h=386776d22c226f3ac6f003dd31a823c77687cc44;sf=tgz
-tar xf /vagrant/opt/mysql.tar.gz -C /usr/src/ && cd /usr/src/mysql/
+tar xf /vagrant/opt/mysql.tar.gz -C /usr/src/ && cd /usr/src/mysql-386776d/
 phpize
 ./configure
 make -j4 && make install
 echo 'extension="mysql.so"' >>/srv/php/lib/php.ini
 yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum --enablerepo=remi -y install redis
+cd /opt/VBoxGuestAdditions-*/init
+./vboxadd setup
 service redis start
 service php-fpm start
 service nginx start
