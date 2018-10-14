@@ -36,6 +36,7 @@ Vagrant.configure("2") do |config|
     sed -i -e 's/\r$//' /vagrant/opt/install.sh
     chmod 0777 /vagrant/opt/install.sh
     /vagrant/opt/install.sh
+    mount -t vboxsf -o uid=0,gid=0 code /code
   SHELL
 
   config.vm.provision "shell",run:"always",inline: <<-SHELL_RUN

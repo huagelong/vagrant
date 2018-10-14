@@ -7,7 +7,7 @@ yum -y install pcre pcre-devel
 yum -y install openssl
 yum -y install openssl-devel
 yum -y install vim
-yum -y install kernel-devel-3.10.0-862.14.4.el7.x86_64
+yum -y install "kernel-devel-$(uname -r)"
 tar xf /vagrant/opt/nginx-1.10.2.tar.gz -C /usr/src/ && cd /usr/src/nginx-1.10.2/
 ./configure --prefix=/srv/nginx --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module --with-pcre
 make -j4 && make install
@@ -61,6 +61,7 @@ yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum --enablerepo=remi -y install redis
 cd /opt/VBoxGuestAdditions-*/init
 ./vboxadd setup
+mount -t vboxsf -o uid=0,gid=0 code /code
 service redis start
 service php-fpm start
 service nginx start
