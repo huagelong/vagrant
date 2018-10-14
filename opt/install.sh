@@ -50,6 +50,13 @@ tar xf /vagrant/opt/swoole-src-4.2.1.tar.gz -C /usr/src/ && cd /usr/src/swoole-s
 ./configure --with-php-config=/srv/php/bin/php-config --disable-openssl --disable-http2 --disable-async-redis --disable-sockets --disable-mysqlnd
 make -j4 && make install
 echo 'extension="swoole.so"' >>/srv/php/lib/php.ini
+cd /vagrant/opt
+curl -o mysql.tar.gz  http://git.php.net/?p=pecl/database/mysql.git;a=snapshot;h=386776d22c226f3ac6f003dd31a823c77687cc44;sf=tgz
+tar xf /vagrant/opt/mysql.tar.gz -C /usr/src/ && cd /usr/src/mysql/
+phpize
+./configure
+make -j4 && make install
+echo 'extension="mysql.so"' >>/srv/php/lib/php.ini
 yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum --enablerepo=remi -y install redis
 service redis start
