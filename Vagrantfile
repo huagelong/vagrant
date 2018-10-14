@@ -41,6 +41,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell",run:"always",inline: <<-SHELL_RUN
     sudo su -
+    mount -t vboxsf -o uid=0,gid=0 code /code
     service redis start
     service php-fpm start
     service nginx start
