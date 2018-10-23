@@ -40,6 +40,7 @@ make -j4 && make install
 \cp -rf /opt/vagrant/opt/www.conf /opt/php/etc/php-fpm.d/www.conf
 mkdir -p /opt/php/var/session
 mkdir -p /opt/php/log/
+ln -s /opt/php/bin/php /usr/bin/php
 echo 'export PATH="/opt/php/bin:$PATH"'>>/etc/profile
 source /etc/profile
 \cp -rf /opt/vagrant/opt/composer /usr/local/bin/composer
