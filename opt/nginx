@@ -9,15 +9,15 @@
 # description: Nginx is a high-performance web and proxy server.
 #              It has a lot of features, but it's not for everyone.
 # processname: nginx
-# pidfile: /srv/nginx/logs/nginx.pid
+# pidfile: /opt/nginx/logs/nginx.pid
 # config: /usr/local/nginx/conf/nginx.conf
 
-nginxd=/srv/nginx/sbin/nginx
-nginx_config=/srv/nginx/conf/nginx.conf
+nginxd=/opt/nginx/sbin/nginx
+nginx_config=/opt/nginx/conf/nginx.conf
 #nginxd=/opt/gitlab/embedded/sbin/nginx
 #nginx_config=/var/opt/gitlab/nginx/conf/nginx.conf
 
-nginx_pid=/srv/nginx/logs/nginx.pid
+nginx_pid=/opt/nginx/logs/nginx.pid
 #nginx_pid=/var/opt/gitlab/nginx/nginx.pid
 
 RETVAL=0
@@ -58,7 +58,7 @@ stop() {
     killproc $nginxd
     RETVAL=$?
     echo
-    [ $RETVAL = 0 ] && rm -f /var/lock/subsys/nginx /srv/nginx/logs/nginx.pid
+    [ $RETVAL = 0 ] && rm -f /var/lock/subsys/nginx /opt/nginx/logs/nginx.pid
 }
 
 
