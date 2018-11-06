@@ -47,7 +47,7 @@ source /etc/profile
 chmod a+x /usr/local/bin/composer
 \cp -rf /usr/src/php-7.1.0/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod a+x /etc/init.d/php-fpm
-tar xf /opt/vagrant/opt/swoole-src-4.2.1.tar.gz -C /usr/src/ && cd /usr/src/swoole-src-4.2.1/
+tar xf /opt/vagrant/opt/swoole-src-4.2.6.tar.gz -C /usr/src/ && cd /usr/src/swoole-src-4.2.6/
 /opt/php/bin/phpize
 ./configure --with-php-config=/opt/php/bin/php-config --disable-openssl --disable-http2 --disable-async-redis --disable-sockets --disable-mysqlnd
 make -j4 && make install
