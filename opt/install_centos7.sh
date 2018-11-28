@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 yum -y update
 yum -y install gcc-c++
 yum -y install autoconf
