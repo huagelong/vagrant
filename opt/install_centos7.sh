@@ -58,8 +58,7 @@ phpize
 ./configure
 make -j4 && make install
 echo 'extension="mysql.so"' >>/opt/php/lib/php.ini
-yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-yum --enablerepo=remi -y install redis
+yum -y install redis
 groupadd www-data
 useradd -g www-data www-data
 service redis start

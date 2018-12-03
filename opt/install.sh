@@ -57,8 +57,7 @@ phpize
 ./configure
 make -j4 && make install
 echo 'extension="mysql.so"' >>/opt/php/lib/php.ini
-yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-yum --enablerepo=remi -y install redis
+yum -y install redis
 cd /opt/VBoxGuestAdditions-*/init
 ./vboxadd setup
 mount -t vboxsf -o uid=0,gid=0 code /code
