@@ -58,9 +58,7 @@ phpize
 ./configure
 make -j4 && make install
 echo 'extension="mysql.so"' >>/opt/php/lib/php.ini
-yum -y install redis
 groupadd www-data
 useradd -g www-data www-data
-service redis start
 service php-fpm start
 service nginx start
