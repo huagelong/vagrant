@@ -32,7 +32,7 @@ yum -y install libxslt
 yum -y install libxslt-devel
 yum -y install bzip2
 yum -y install bzip2-devel
-tar xf /opt/vagrant/opt/php-7.2.13.tar.gz -C /usr/src/ && cd /usr/src/php-7.2.13/
+tar xf /opt/vagrant/opt/php-7.2.13.tar.gz -C /usr/src/ && cd /usr/src/php-src-php-7.2.13/
 ./configure --prefix=/opt/php --with-curl --with-freetype-dir --with-gd --with-gettext --with-iconv-dir --with-kerberos --with-libdir=lib64 --with-libxml-dir --with-mysqli --with-openssl --with-pcre-regex --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-jpeg-dir --with-xmlrpc --with-xsl --with-zlib --with-bz2 --with-mhash --enable-fpm --enable-bcmath --enable-libxml --enable-inline-optimization --enable-gd-native-ttf --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml --enable-zip
 make -j4 && make install
 \cp -rf /opt/vagrant/opt/php.ini /opt/php/lib/php.ini
@@ -45,11 +45,11 @@ echo 'export PATH="/opt/php/bin:$PATH"'>>/etc/profile
 source /etc/profile
 \cp -rf /opt/vagrant/opt/composer /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer
-\cp -rf /usr/src/php-7.2.13/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+\cp -rf /usr/src/php-src-php-7.2.13/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod a+x /etc/init.d/php-fpm
 tar xf /opt/vagrant/opt/swoole-src-4.2.6.tar.gz -C /usr/src/ && cd /usr/src/swoole-src-4.2.6/
 /opt/php/bin/phpize
-./configure --with-php-config=/opt/php/bin/php-config --disable-openssl --disable-http2 --disable-async-redis --disable-sockets --disable-mysqlnd
+./configure --with-php-config=/opt/php/bin/php-config --disable-openssl --disable-http2 --enable-async-redis --disable-sockets --disable-mysqlnd
 make -j4 && make install
 echo 'extension="swoole.so"' >>/opt/php/lib/php.ini
 cd /vagrant/opt
