@@ -32,6 +32,9 @@ yum -y install libxslt
 yum -y install libxslt-devel
 yum -y install bzip2
 yum -y install bzip2-devel
+yum -y install telnet
+yum -y install lsof
+yum -y install htop
 tar xf /opt/vagrant/opt/php-7.2.21.tar.gz -C /usr/src/ && cd /usr/src/php-7.2.21/
 ./configure --prefix=/opt/php --with-curl --with-freetype-dir --with-gd --with-gettext --with-iconv-dir --with-kerberos --with-libdir=lib64 --with-libxml-dir --with-mysqli --with-openssl --with-pcre-regex --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-jpeg-dir --with-xmlrpc --with-xsl --with-zlib --with-bz2 --with-mhash --enable-fpm --enable-bcmath --enable-libxml --enable-inline-optimization --enable-gd-native-ttf --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml --enable-zip
 make -j4 && make install
