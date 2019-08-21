@@ -49,9 +49,14 @@ chmod a+x /usr/local/bin/composer
 chmod a+x /etc/init.d/php-fpm
 tar xf /opt/vagrant/opt/swoole-src-4.2.6.tar.gz -C /usr/src/ && cd /usr/src/swoole-src-4.2.6/
 /opt/php/bin/phpize
-./configure --with-php-config=/opt/php/bin/php-config --disable-openssl --disable-http2 --enable-async-redis --disable-sockets --disable-mysqlnd
+./configure --with-php-config=/opt/php/bin/php-config --disable-openssl --disable-http2 --enable-async-redis --disable-sockets --enable-mysqlnd
 make -j4 && make install
 echo 'extension="swoole.so"' >>/opt/php/lib/php.ini
+tar xf /opt/vagrant/opt/phpredis-5.0.2.tar.gz -C /usr/src/ && cd /usr/src/phpredis-5.0.2/
+/opt/php/bin/phpize
+./configure --with-php-config=/opt/php/bin/php-config
+make -j4 && make install
+echo 'extension="redis.so"' >>/opt/php/lib/php.ini
 cd /vagrant/opt
 tar xf /opt/vagrant/opt/mysql.tar.gz -C /usr/src/ && cd /usr/src/mysql-386776d/
 phpize
